@@ -41,14 +41,18 @@
                         <div class="payment-methods">
                             <input type="radio" id="payment_wave" name="payment_method" value="wave" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'wave') ? 'checked' : '' ?> required>
                             <label for="payment_wave" class="payment-card payment-wave">
-                                <div class="payment-logo">📱</div>
+                                <div class="payment-logo">
+                                    <img src="images/payment/wave.png" alt="Wave" class="payment-logo-img">
+                                </div>
                                 <div class="payment-name">Wave</div>
                                 <div class="payment-desc">Paiement mobile</div>
                             </label>
 
                             <input type="radio" id="payment_om" name="payment_method" value="om" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'om') ? 'checked' : '' ?>>
                             <label for="payment_om" class="payment-card payment-om">
-                                <div class="payment-logo">🍊</div>
+                                <div class="payment-logo">
+                                    <img src="images/payment/orange-money.png" alt="Orange Money" class="payment-logo-img">
+                                </div>
                                 <div class="payment-name">Orange Money</div>
                                 <div class="payment-desc">Paiement mobile</div>
                             </label>
