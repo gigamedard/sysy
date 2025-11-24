@@ -32,6 +32,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="delivery_address">Adresse de livraison</label>
+                        <textarea id="delivery_address" name="delivery_address" rows="3" placeholder="Ex: Dakar, Plateau, Rue 10 x 15" required><?= htmlspecialchars($_POST['delivery_address'] ?? '') ?></textarea>
+                    </div>
+
+                    <div class="form-group">
                         <label for="payment_method">Moyen de Paiement</label>
                         <select id="payment_method" name="payment_method" required>
                             <option value="">Choisir...</option>

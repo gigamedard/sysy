@@ -12,7 +12,7 @@ class OrderService {
         $this->pdo = Database::getConnection();
     }
 
-    public function createOrder(string $name, string $phone, string $paymentMethod, Cart $cart): int {
+    public function createOrder(string $name, string $phone, string $deliveryAddress, string $paymentMethod, Cart $cart): int {
         if ($cart->getCount() === 0) {
             throw new Exception("Le panier est vide.");
         }
@@ -25,12 +25,13 @@ class OrderService {
             $total = $cart->getTotal($bookRepo);
 
             $stmt = $this->pdo->prepare("
-                INSERT INTO orders (customer_name, customer_phone, payment_method, total_amount)
-                VALUES (:name, :phone, :payment, :total)
+                INSERT INTO orders (customer_name, customer_phone, delivery_address, payment_method, total_amount)
+                VALUES (:name, :phone, :address, :payment, :total)
             ");
             $stmt->execute([
                 'name' => $name,
                 'phone' => $phone,
+                'address' => $deliveryAddress,
                 'payment' => $paymentMethod,
                 'total' => $total
             ]);

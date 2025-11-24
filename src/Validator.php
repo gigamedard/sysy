@@ -8,20 +8,20 @@ class Validator {
     public function validateOrder(array $data): bool {
         $this->errors = [];
 
-        if (empty($data['name'])) {
-            $this->errors['name'] = "Le nom est obligatoire.";
+        if (empty($data['name']) || strlen(trim($data['name'])) < 3) {
+            $this->errors[] = "Le nom doit contenir au moins 3 caractères.";
         }
 
-        if (empty($data['phone'])) {
-            $this->errors['phone'] = "Le téléphone est obligatoire.";
-        } elseif (!preg_match('/^[0-9\+\s]+$/', $data['phone'])) {
-            $this->errors['phone'] = "Le format du téléphone est invalide.";
+        if (empty($data['phone']) || !preg_match('/^[0-9\s\-]+$/', $data['phone'])) {
+            $this->errors[] = "Le numéro de téléphone est invalide.";
         }
 
-        if (empty($data['payment_method'])) {
-            $this->errors['payment_method'] = "Veuillez choisir un moyen de paiement.";
-        } elseif (!in_array($data['payment_method'], ['wave', 'om', 'cod'])) {
-            $this->errors['payment_method'] = "Moyen de paiement invalide.";
+        if (empty($data['delivery_address']) || strlen(trim($data['delivery_address'])) < 10) {
+            $this->errors[] = "Veuillez fournir une adresse de livraison complète (minimum 10 caractères).";
+        }
+
+        if (empty($data['payment_method']) || !in_array($data['payment_method'], ['wave', 'om', 'cod'])) {
+            $this->errors[] = "Veuillez sélectionner un moyen de paiement valide.";
         }
 
         return empty($this->errors);

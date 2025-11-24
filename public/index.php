@@ -43,6 +43,7 @@ if ($action) {
                 $orderId = $orderService->createOrder(
                     $_POST['name'],
                     $_POST['phone'],
+                    $_POST['delivery_address'],
                     $_POST['payment_method'],
                     $cart
                 );

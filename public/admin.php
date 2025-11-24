@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: login.php');
+    exit;
+}
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -99,9 +106,14 @@ if (isset($_GET['order_id'])) {
 </head>
 <body>
     <div class="admin-header">
-        <div class="container">
-            <h1>📊 Administration - Commandes</h1>
-            <p>Gestion des commandes client</p>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1>📊 Administration - Commandes</h1>
+                <p>Gestion des commandes client</p>
+            </div>
+            <a href="logout.php" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white;">
+                🚪 Déconnexion
+            </a>
         </div>
     </div>
 
@@ -129,6 +141,10 @@ if (isset($_GET['order_id'])) {
                     <div class="meta-item">
                         <span class="meta-label">Téléphone</span>
                         <span class="meta-value"><?= htmlspecialchars($orderDetails['customer_phone']) ?></span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Adresse de livraison</span>
+                        <span class="meta-value"><?= htmlspecialchars($orderDetails['delivery_address']) ?></span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Paiement</span>
