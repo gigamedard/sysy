@@ -73,6 +73,19 @@ switch ($page) {
         $total = $cart->getTotal($bookRepo);
         require_once __DIR__ . '/../templates/cart.php';
         break;
+    
+    case 'checkout':
+        $total = $cart->getTotal($bookRepo);
+        if ($cart->getCount() === 0) {
+            header('Location: index.php');
+            exit;
+        }
+        require_once __DIR__ . '/../templates/checkout.php';
+        break;
+
+    case 'success':
+        require_once __DIR__ . '/../templates/success.php';
+        break;
 
     default:
         echo "<h1>Page non trouvée</h1>";
