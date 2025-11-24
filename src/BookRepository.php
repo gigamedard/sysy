@@ -41,4 +41,41 @@ class BookRepository {
         }
         return null;
     }
+
+    public function create(string $title, string $author, float $price, string $imageUrl, string $description): int {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO books (title, author, price, image_url, description) 
+            VALUES (:title, :author, :price, :image_url, :description)
+        ");
+        $stmt->execute([
+            'title' => $title,
+            'author' => $author,
+            'price' => $price,
+            'image_url' => $imageUrl,
+            'description' => $description
+        ]);
+        return (int)$this->pdo->lastInsertId();
+    }
+
+    public function update(int $id, string $title, string $author, float $price, string $imageUrl, string $description): bool {
+        $stmt = $this->pdo->prepare("
+            UPDATE books 
+            SET title = :title, author = :author, price = :price, 
+                image_url = :image_url, description = :description 
+            WHERE id = :id
+        ");
+        return $stmt->execute([
+            'id' => $id,
+            'title' => $title,
+            'author' => $author,
+            'price' => $price,
+            'image_url' => $imageUrl,
+            'description' => $description
+        ]);
+    }
+
+    public function delete(int $id): bool {
+        $stmt = $this->pdo->prepare("DELETE FROM books WHERE id = :id");
+        return $stmt->execute(['id' => $id]);
+    }
 }

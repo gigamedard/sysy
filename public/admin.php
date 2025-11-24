@@ -118,6 +118,10 @@ if (isset($_GET['order_id'])) {
     </div>
 
     <main class="container">
+        <div class="admin-nav" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+            <a href="admin.php" style="padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">📊 Commandes</a>
+            <a href="admin-books.php" style="padding: 0.75rem 1.5rem; background: white; color: var(--primary-color); text-decoration: none; border-radius: 8px; font-weight: 600; border: 2px solid var(--primary-color);">📚 Livres</a>
+        </div>
         <?php if ($orderDetails): ?>
             <!-- Order Details View -->
             <a href="admin.php" class="back-link">← Retour à la liste</a>
