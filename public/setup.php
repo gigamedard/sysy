@@ -41,12 +41,21 @@ try {
             id INT AUTO_INCREMENT PRIMARY KEY,
             customer_name VARCHAR(255) NOT NULL,
             customer_phone VARCHAR(20) NOT NULL,
+            delivery_address VARCHAR(500) NOT NULL,
             payment_method ENUM('wave', 'om', 'cod') NOT NULL,
             total_amount DECIMAL(10, 2) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ");
     echo "Table 'orders' vérifiée.<br>";
+
+    // Check if delivery_address column exists (migration for existing databases)
+    $columns = $pdo->query("SHOW COLUMNS FROM orders LIKE 'delivery_address'")->fetchAll();
+    if (empty($columns)) {
+        echo "Ajout de la colonne 'delivery_address'...<br>";
+        $pdo->exec("ALTER TABLE orders ADD COLUMN delivery_address VARCHAR(500) NOT NULL AFTER customer_phone");
+        echo "Colonne 'delivery_address' ajoutée avec succès.<br>";
+    }
 
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS order_items (
