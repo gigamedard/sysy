@@ -19,31 +19,4 @@ try {
     $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$config['dbname']}`");
     
     // Select the database
-    $pdo->exec("USE `{$config['dbname']}`");
-    echo "Base de données sélectionnée.<br>";
-
-    // Read schema.sql
-    $sql = file_get_contents(__DIR__ . '/../schema.sql');
-    
-    // Execute schema
-    echo "Importation des tables...<br>";
-    // Execute schema
-    echo "Importation des tables...<br>";
-    
-    // Remove comments
-    $sql = preg_replace('/--.*$/m', '', $sql);
-    
-    // Split by semicolon
-    $statements = array_filter(array_map('trim', explode(';', $sql)));
-
-    foreach ($statements as $stmt) {
-        if (!empty($stmt)) {
-            $pdo->exec($stmt);
-        }
-    }
-    
-    echo "✅ Installation terminée avec succès ! <a href='index.php'>Aller à l'accueil</a>";
-
-} catch (PDOException $e) {
-    die("❌ Erreur : " . $e->getMessage());
 }
