@@ -60,7 +60,8 @@ class OrderService {
 
         } catch (Exception $e) {
             $this->pdo->rollBack();
-            throw $e;
+            // Re-throw with more details
+            throw new Exception("Erreur SQL lors de la création de la commande : " . $e->getMessage());
         }
     }
 }

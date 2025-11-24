@@ -14,6 +14,12 @@
                     </div>
                 <?php endif; ?>
 
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger">
+                        <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
+
                 <form action="index.php?action=checkout" method="POST">
                     <div class="form-group">
                         <label for="name">Nom complet</label>
