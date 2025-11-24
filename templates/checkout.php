@@ -37,13 +37,29 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="payment_method">Moyen de Paiement</label>
-                        <select id="payment_method" name="payment_method" required>
-                            <option value="">Choisir...</option>
-                            <option value="wave" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'wave') ? 'selected' : '' ?>>Wave</option>
-                            <option value="om" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'om') ? 'selected' : '' ?>>Orange Money</option>
-                            <option value="cod" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'cod') ? 'selected' : '' ?>>Paiement à la livraison</option>
-                        </select>
+                        <label>Moyen de Paiement *</label>
+                        <div class="payment-methods">
+                            <input type="radio" id="payment_wave" name="payment_method" value="wave" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'wave') ? 'checked' : '' ?> required>
+                            <label for="payment_wave" class="payment-card payment-wave">
+                                <div class="payment-logo">📱</div>
+                                <div class="payment-name">Wave</div>
+                                <div class="payment-desc">Paiement mobile</div>
+                            </label>
+
+                            <input type="radio" id="payment_om" name="payment_method" value="om" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'om') ? 'checked' : '' ?>>
+                            <label for="payment_om" class="payment-card payment-om">
+                                <div class="payment-logo">🍊</div>
+                                <div class="payment-name">Orange Money</div>
+                                <div class="payment-desc">Paiement mobile</div>
+                            </label>
+
+                            <input type="radio" id="payment_cod" name="payment_method" value="cod" <?= (isset($_POST['payment_method']) && $_POST['payment_method'] === 'cod') ? 'checked' : '' ?>>
+                            <label for="payment_cod" class="payment-card payment-cod">
+                                <div class="payment-logo">💵</div>
+                                <div class="payment-name">Espèces</div>
+                                <div class="payment-desc">À la livraison</div>
+                            </label>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-accent btn-block">Confirmer la commande</button>
