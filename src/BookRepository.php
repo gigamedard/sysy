@@ -17,6 +17,17 @@ class BookRepository {
         while ($row = $stmt->fetch()) {
             $books[] = Book::fromArray($row);
         }
+        // Debugging
+        if (empty($books)) {
+            echo "<!-- DEBUG: Aucune donnée trouvée dans la table books -->";
+            // Check if table exists
+            try {
+                $check = $this->pdo->query("SELECT COUNT(*) FROM books");
+                echo "<!-- DEBUG: Nombre de livres en base : " . $check->fetchColumn() . " -->";
+            } catch (\Exception $e) {
+                echo "<!-- DEBUG: Erreur SQL : " . $e->getMessage() . " -->";
+            }
+        }
         return $books;
     }
 
