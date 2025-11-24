@@ -38,6 +38,20 @@ if ($action) {
     if ($action === 'checkout' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $validator = new Validator();
         if ($validator->validateOrder($_POST)) {
+            // For Wave and Orange Money, redirect to payment page
+            if (in_array($_POST['payment_method'], ['wave', 'om'])) {
+                // Store order data in session
+                $_SESSION['pending_order'] = [
+                    'name' => $_POST['name'],
+                    'phone' => $_POST['phone'],
+                    'delivery_address' => $_POST['delivery_address'],
+                    'payment_method' => $_POST['payment_method']
+                ];
+                header('Location: payment.php');
+                exit;
+            }
+            
+            // For cash on delivery, process immediately
             try {
                 $orderService = new OrderService();
                 $orderId = $orderService->createOrder(
