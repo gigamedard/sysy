@@ -14,7 +14,7 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="/index.php?action=checkout" method="POST">
+                <form action="index.php?action=checkout" method="POST">
                     <div class="form-group">
                         <label for="name">Nom complet</label>
                         <input type="text" id="name" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" required>

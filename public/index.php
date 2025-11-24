@@ -19,19 +19,19 @@ $cart = new Cart();
 if ($action) {
     if ($action === 'add' && isset($_POST['book_id'])) {
         $cart->add((int)$_POST['book_id']);
-        header('Location: /index.php?page=cart');
+        header('Location: index.php?page=cart');
         exit;
     }
     
     if ($action === 'remove' && isset($_GET['id'])) {
         $cart->remove((int)$_GET['id']);
-        header('Location: /index.php?page=cart');
+        header('Location: index.php?page=cart');
         exit;
     }
 
     if ($action === 'clear') {
         $cart->clear();
-        header('Location: /index.php?page=cart');
+        header('Location: index.php?page=cart');
         exit;
     }
 
@@ -47,7 +47,7 @@ if ($action) {
                     $cart
                 );
                 $cart->clear();
-                header("Location: /index.php?page=success&order=$orderId");
+                header("Location: index.php?page=success&order=$orderId");
                 exit;
             } catch (Exception $e) {
                 $error = "Erreur lors de la commande : " . $e->getMessage();
@@ -77,7 +77,7 @@ switch ($page) {
     case 'checkout':
         $total = $cart->getTotal($bookRepo);
         if ($cart->getCount() === 0) {
-            header('Location: /');
+            header('Location: index.php');
             exit;
         }
         require_once __DIR__ . '/../templates/checkout.php';

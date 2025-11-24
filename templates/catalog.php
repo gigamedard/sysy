@@ -19,7 +19,7 @@
                 
                 <div class="card-price"><?= number_format($book->price, 0, ',', ' ') ?> FCFA</div>
                 
-                <form action="/index.php?action=add" method="POST">
+                <form action="index.php?action=add" method="POST">
                     <input type="hidden" name="book_id" value="<?= $book->id ?>">
                     <button type="submit" class="btn btn-block">Ajouter au panier</button>
                 </form>

@@ -2,7 +2,7 @@
 
 <?php if (empty($cartItems)): ?>
     <div class="alert alert-info">
-        Votre panier est vide. <a href="/">Retourner au catalogue</a>.
+        Votre panier est vide. <a href="index.php">Retourner au catalogue</a>.
     </div>
 <?php else: ?>
     <table class="table">
@@ -25,7 +25,7 @@
                         <td><?= $quantity ?></td>
                         <td><?= number_format($book->price * $quantity, 0, ',', ' ') ?> FCFA</td>
                         <td>
-                            <a href="/index.php?action=remove&id=<?= $bookId ?>" class="btn btn-danger btn-sm">Retirer</a>
+                            <a href="index.php?action=remove&id=<?= $bookId ?>" class="btn btn-danger btn-sm">Retirer</a>
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -42,10 +42,10 @@
     </table>
 
     <div class="flex-between">
-        <a href="/index.php?action=clear" class="btn btn-danger">Vider le panier</a>
+        <a href="index.php?action=clear" class="btn btn-danger">Vider le panier</a>
         <div>
-            <a href="/" class="btn">Continuer mes achats</a>
-            <a href="/index.php?page=checkout" class="btn btn-accent">Commander</a>
+            <a href="index.php" class="btn">Continuer mes achats</a>
+            <a href="index.php?page=checkout" class="btn btn-accent">Commander</a>
         </div>
     </div>
 <?php endif; ?>

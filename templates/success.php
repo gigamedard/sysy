@@ -8,6 +8,6 @@
     <p>Nous vous contacterons bientôt pour la livraison.</p>
     
     <div class="mt-2">
-        <a href="/" class="btn">Retour à l'accueil</a>
+        <a href="index.php" class="btn">Retour à l'accueil</a>
     </div>
 </div>
