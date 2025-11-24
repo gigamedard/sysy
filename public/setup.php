@@ -27,7 +27,20 @@ try {
     
     // Execute schema
     echo "Importation des tables...<br>";
-    $pdo->exec($sql);
+    // Execute schema
+    echo "Importation des tables...<br>";
+    
+    // Remove comments
+    $sql = preg_replace('/--.*$/m', '', $sql);
+    
+    // Split by semicolon
+    $statements = array_filter(array_map('trim', explode(';', $sql)));
+
+    foreach ($statements as $stmt) {
+        if (!empty($stmt)) {
+            $pdo->exec($stmt);
+        }
+    }
     
     echo "✅ Installation terminée avec succès ! <a href='index.php'>Aller à l'accueil</a>";
 
