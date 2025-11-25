@@ -157,7 +157,22 @@ $statusClasses = [
                             <?= date('d/m/Y à H:i', strtotime($orderDetails['created_at'])) ?>
                         </small>
                     </div>
-                    <span class="status-badge status-pending">En attente</span>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <form method="POST" style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="hidden" name="order_id" value="<?= $orderDetails['id'] ?>">
+                            <select name="status" style="padding: 0.25rem; border-radius: 4px; border: 1px solid #d1d5db;">
+                                <?php foreach ($statusLabels as $value => $label): ?>
+                                    <option value="<?= $value ?>" <?= $orderDetails['status'] === $value ? 'selected' : '' ?>>
+                                        <?= $label ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button type="submit" name="update_status" class="btn btn-sm">Mettre à jour</button>
+                        </form>
+                        <span class="status-badge <?= $statusClasses[$orderDetails['status']] ?? '' ?>">
+                            <?= $statusLabels[$orderDetails['status']] ?? $orderDetails['status'] ?>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="order-meta">
