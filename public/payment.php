@@ -54,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_payment'])) {
                 $orderData['phone'],
                 $orderData['delivery_address'],
                 $orderData['payment_method'],
-                $cart
+                $cart,
+                'paid' // Status is paid for mobile money
             );
             
             // Clear cart and session
