@@ -42,25 +42,26 @@ class BookRepository {
         return null;
     }
 
-    public function create(string $title, string $author, float $price, string $imageUrl, string $description): int {
+    public function create(string $title, string $author, float $price, int $stock, string $imageUrl, string $description): int {
         $stmt = $this->pdo->prepare("
             INSERT INTO books (title, author, price, stock, image_url, description) 
-            VALUES (:title, :author, :price, 0, :image_url, :description)
+            VALUES (:title, :author, :price, :stock, :image_url, :description)
         ");
         $stmt->execute([
             'title' => $title,
             'author' => $author,
             'price' => $price,
+            'stock' => $stock,
             'image_url' => $imageUrl,
             'description' => $description
         ]);
         return (int)$this->pdo->lastInsertId();
     }
 
-    public function update(int $id, string $title, string $author, float $price, string $imageUrl, string $description): bool {
+    public function update(int $id, string $title, string $author, float $price, int $stock, string $imageUrl, string $description): bool {
         $stmt = $this->pdo->prepare("
             UPDATE books 
-            SET title = :title, author = :author, price = :price, 
+            SET title = :title, author = :author, price = :price, stock = :stock,
                 image_url = :image_url, description = :description 
             WHERE id = :id
         ");
@@ -69,6 +70,7 @@ class BookRepository {
             'title' => $title,
             'author' => $author,
             'price' => $price,
+            'stock' => $stock,
             'image_url' => $imageUrl,
             'description' => $description
         ]);

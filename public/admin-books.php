@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_book'])) {
     $title = $_POST['title'] ?? '';
     $author = $_POST['author'] ?? '';
     $price = (float)($_POST['price'] ?? 0);
+    $stock = (int)($_POST['stock'] ?? 0);
     $description = $_POST['description'] ?? '';
     $imageUrl = $_POST['existing_image'] ?? '';
     
@@ -60,11 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_book'])) {
     if (empty($error)) {
         if (isset($_POST['book_id']) && !empty($_POST['book_id'])) {
             // Update
-            $bookRepo->update((int)$_POST['book_id'], $title, $author, $price, $imageUrl, $description);
+            $bookRepo->update((int)$_POST['book_id'], $title, $author, $price, $stock, $imageUrl, $description);
             $message = "Livre modifié avec succès.";
         } else {
             // Create
-            $bookRepo->create($title, $author, $price, $imageUrl, $description);
+            $bookRepo->create($title, $author, $price, $stock, $imageUrl, $description);
             $message = "Livre ajouté avec succès.";
         }
         $action = 'list';
@@ -222,6 +223,11 @@ $books = $bookRepo->findAll();
                     <div class="form-group">
                         <label for="price">Prix (FCFA) *</label>
                         <input type="number" id="price" name="price" step="0.01" value="<?= $editBook->price ?? '' ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Stock *</label>
+                        <input type="number" id="stock" name="stock" value="<?= $editBook->stock ?? 0 ?>" required>
                     </div>
 
                     <div class="form-group">

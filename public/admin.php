@@ -239,7 +239,9 @@ $statusClasses = [
                                     <?= date('d/m/Y à H:i', strtotime($order['created_at'])) ?>
                                 </small>
                             </div>
-                            <span class="status-badge status-pending">En attente</span>
+                            <span class="status-badge <?= $statusClasses[$order['status']] ?? '' ?>">
+                                <?= $statusLabels[$order['status']] ?? $order['status'] ?>
+                            </span>
                         </div>
 
                         <div class="order-meta">
