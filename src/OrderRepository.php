@@ -45,4 +45,17 @@ class OrderRepository {
         $stmt->execute(['order_id' => $orderId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Update order status
+     */
+    public function updateStatus(int $orderId, string $status): bool {
+        $validStatuses = ['pending', 'paid', 'delivered'];
+        if (!in_array($status, $validStatuses)) {
+            return false;
+        }
+
+        $stmt = $this->pdo->prepare("UPDATE orders SET status = :status WHERE id = :id");
+        return $stmt->execute(['id' => $orderId, 'status' => $status]);
+    }
 }

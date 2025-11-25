@@ -19,10 +19,20 @@
                 
                 <div class="card-price"><?= number_format($book->price, 0, ',', ' ') ?> FCFA</div>
                 
-                <form action="index.php?action=add" method="POST">
-                    <input type="hidden" name="book_id" value="<?= $book->id ?>">
-                    <button type="submit" class="btn btn-block">Ajouter au panier</button>
-                </form>
+                <?php if ($book->stock > 0): ?>
+                    <div class="stock-badge stock-available">
+                        ✓ En stock (<?= $book->stock ?> disponibles)
+                    </div>
+                    <form action="index.php?action=add" method="POST">
+                        <input type="hidden" name="book_id" value="<?= $book->id ?>">
+                        <button type="submit" class="btn btn-block">Ajouter au panier</button>
+                    </form>
+                <?php else: ?>
+                    <div class="stock-badge stock-out">
+                        ✗ Rupture de stock
+                    </div>
+                    <button class="btn btn-block" disabled style="opacity: 0.5; cursor: not-allowed;">Non disponible</button>
+                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>

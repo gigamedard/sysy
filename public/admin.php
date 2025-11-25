@@ -12,6 +12,16 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Bookstore\OrderRepository;
 
 $orderRepo = new OrderRepository();
+$message = '';
+
+// Handle status update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
+    $orderId = (int)$_POST['order_id'];
+    $newStatus = $_POST['status'];
+    if ($orderRepo->updateStatus($orderId, $newStatus)) {
+        $message = "Statut mis à jour avec succès.";
+    }
+}
 
 // Get all orders
 $orders = $orderRepo->findAll();
@@ -24,6 +34,19 @@ if (isset($_GET['order_id'])) {
         $orderDetails['items'] = $orderRepo->findOrderItems((int)$_GET['order_id']);
     }
 }
+
+// Status labels and styles
+$statusLabels = [
+    'pending' => 'En attente de paiement',
+    'paid' => 'Payé / En cours de livraison',
+    'delivered' => 'Livré'
+];
+
+$statusClasses = [
+    'pending' => 'status-pending',
+    'paid' => 'status-paid',
+    'delivered' => 'status-delivered'
+];
 
 ?>
 <!DOCTYPE html>
